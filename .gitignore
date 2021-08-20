@@ -1,0 +1,14 @@
+BoBStore.Api/bin/*
+BoBStore.Api/obj/*
+
+BoBStore.Domain/bin/*
+BoBStore.Domain/obj/*
+
+BoBStore.Infra/bin/*
+BoBStore.Infra/obj/*
+
+BoBStore.Shared/bin/*
+BoBStore.Shared/obj/*
+
+BoBStore.Tests/bin/*
+BoBStore.Tests/obj/*
