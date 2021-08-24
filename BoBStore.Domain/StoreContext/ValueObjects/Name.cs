@@ -1,14 +1,27 @@
 
 
+using Flunt.Notifications;
+using Flunt.Validations;
+
 namespace BoBStore.Domain.StoreContext.ValueObjects
 {
 
-    public class Name
+    public class Name : Notifiable<Notification>
     {
         public Name(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsLowerThan(firstName, 3, "FirstName", "O nome deve ser maior que 3 caractéres")
+                .IsGreaterThan(FirstName, 42, "FirstName", "O nome não pode ser maior que 42 caractéres.")
+                .IsLowerThan(lastName, 3, "LastName", "O sobrenome deve ser maior que 3 caractéres.")
+                .IsGreaterThan(lastName, 42, "LastName", "O sobrenome deve ser menor que 42 caractéres.")
+            );
+
+
         }
 
         public string FirstName { get; private set; }
