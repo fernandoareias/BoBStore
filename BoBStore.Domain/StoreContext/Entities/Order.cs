@@ -38,6 +38,8 @@ namespace BoBStore.Domain.StoreContext.Entities
         {
             //Gera o numero do pedido
             Number = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8);
+            if (_items.Count == 0)
+                AddNotification("Order", "Este pedido não possui itens.");
             // Validar
         }
         // Paga um pedido
