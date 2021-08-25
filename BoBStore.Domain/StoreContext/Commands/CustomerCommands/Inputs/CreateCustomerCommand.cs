@@ -18,14 +18,14 @@ namespace BoBStore.Domain.StoreContext.CustomerCommands.Inputs
         {
             AddNotifications(new Contract<Notification>()
                .Requires()
-               .IsLowerThan(FirstName, 42, "FirstName", "O nome não pode ser maior que 42 caractéres.")
-               .IsGreaterThan(FirstName, 3, "FirstName", "O nome deve ser maior que 3 caractéres")
-               .IsLowerThan(LastName, 42, "LastName", "O sobrenome deve ser menor que 42 caractéres.")
-               .IsGreaterThan(LastName, 3, "LastName", "O sobrenome deve ser maior que 3 caractéres.")
+               .IsLowerThan(FirstName, 40, "FirstName", "O nome não pode ser maior que 42 caractéres.")
+               .IsGreaterThan(FirstName, 1, "FirstName", "O nome deve ser maior que 3 caractéres")
+               .IsLowerThan(LastName, 40, "LastName", "O sobrenome deve ser menor que 42 caractéres.")
+               .IsGreaterThan(LastName, 1, "LastName", "O sobrenome deve ser maior que 3 caractéres.")
                .IsEmail(Email, "Email", "O E-mail é invalido.")
-               .IsLowerThan(Document, 11, "Document", "CPF Inválido.")
+               .IsLowerThan(Document, 12, "Document", "CPF Inválido.")
            );
-            return Valid();
+            return IsValid;
         }
     }
 }
