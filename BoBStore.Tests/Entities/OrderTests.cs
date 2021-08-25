@@ -29,6 +29,8 @@ namespace BoBStore.Tests.ValueObjects
 
         }
 
+
+
         // Criar um novo pedido
         [TestMethod]
         public void DeveCriarUmPedidoValido()
