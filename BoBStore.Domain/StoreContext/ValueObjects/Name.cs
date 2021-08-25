@@ -15,10 +15,10 @@ namespace BoBStore.Domain.StoreContext.ValueObjects
 
             AddNotifications(new Contract<Notification>()
                 .Requires()
-                .IsLowerThan(firstName, 3, "FirstName", "O nome deve ser maior que 3 caractéres")
-                .IsGreaterThan(FirstName, 42, "FirstName", "O nome não pode ser maior que 42 caractéres.")
-                .IsLowerThan(lastName, 3, "LastName", "O sobrenome deve ser maior que 3 caractéres.")
-                .IsGreaterThan(lastName, 42, "LastName", "O sobrenome deve ser menor que 42 caractéres.")
+                .IsLowerThan(FirstName, 42, "FirstName", "O nome não pode ser maior que 42 caractéres.")
+                .IsGreaterThan(firstName, 3, "FirstName", "O nome deve ser maior que 3 caractéres")
+                .IsLowerThan(lastName, 42, "LastName", "O sobrenome deve ser menor que 42 caractéres.")
+                .IsGreaterThan(lastName, 3, "LastName", "O sobrenome deve ser maior que 3 caractéres.")
             );
 
 
