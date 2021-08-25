@@ -26,7 +26,7 @@ namespace BoBStore.Domain.StoreContext.OrderCommands.Inputs
                 .IsGreaterThan(OrderItens.Count, 0, "Items", "Nenhum item do pedido foi encontrado.")
 
             );
-            return Valid();
+            return IsValid;
         }
     }
 
