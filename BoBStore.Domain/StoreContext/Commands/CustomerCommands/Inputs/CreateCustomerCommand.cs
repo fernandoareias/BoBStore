@@ -2,10 +2,10 @@
 
 using Flunt.Notifications;
 using Flunt.Validations;
-
+using BoBStore.Shared.Commands;
 namespace BoBStore.Domain.StoreContext.CustomerCommands.Inputs
 {
-    public class CreateCustomerCommand : Notifiable<Notification>
+    public class CreateCustomerCommand : Notifiable<Notification>, ICommands
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
