@@ -29,8 +29,12 @@ namespace BoBStore.Domain.StoreContext.Entities
         public IReadOnlyCollection<Delivery> Deliveries => _deliveries.ToArray();
 
 
-        public void AddItem(OrderItem item)
+        public void AddItem(Product product, int quantity)
         {
+            if (quantity > product.Quantity)
+                AddNotification("OrderItem", $"Produto {product.Title} não tem {quantity} itens em estoque.");
+
+            var item = new OrderItem(product, quantity);
             _items.Add(item);
         }
         // Cria um pedido
@@ -55,13 +59,12 @@ namespace BoBStore.Domain.StoreContext.Entities
         {
             // A cada 5 produtos é uma entrega
             var deliveries = new List<Delivery>();
-            deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
             var count = 1;
             foreach (var item in _items)
             {
-                if (count < 5)
+                if (count == 5)
                 {
-                    count = 0;
+                    count = 1;
                     deliveries.Add(new Delivery(DateTime.Now.AddDays(5)));
                 }
 
