@@ -25,5 +25,10 @@ namespace BoBStore.Domain.StoreContext.Entities
         {
             return Title;
         }
+
+        public void DecreaseQuantity(int quantity)
+        {
+            Quantity -= quantity;
+        }
     }
 }
