@@ -15,6 +15,8 @@ namespace BoBStore.Domain.StoreContext.Entities
 
             if (product.Quantity < quantity)
                 AddNotification("Quantity", "Produto fora de estoque");
+
+            product.DecreaseQuantity(quantity);
         }
 
         public Product Product { get; private set; }
