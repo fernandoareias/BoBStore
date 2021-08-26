@@ -1,11 +1,12 @@
 
 
 using BoBStore.Domain.StoreContext.Enums;
+using BoBStore.Shared.Entities;
 
 namespace BoBStore.Domain.StoreContext.ValueObjects
 {
 
-    public class Address
+    public class Address : Entity
     {
         public Address(string street, string number, string complement, string district, string city, string state, string country, string zipCode, EAddressType type)
         {
