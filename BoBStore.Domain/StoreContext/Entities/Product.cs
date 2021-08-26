@@ -1,10 +1,11 @@
 
 
 using System;
+using BoBStore.Shared.Entities;
 
 namespace BoBStore.Domain.StoreContext.Entities
 {
-    public class Product
+    public class Product  : Entity
     {
         public Product(string title, string description, decimal price, string image, int quantity)
         {
