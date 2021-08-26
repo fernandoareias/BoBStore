@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BoBStore.Domain.StoreContext.ValueObjects;
+using BoBStore.Shared.Entities;
 using Flunt.Notifications;
 
 namespace BoBStore.Domain.StoreContext.Entities
 {
-    public class Customer : Notifiable<Notification>
+    public class Customer : Entity
     {
         private readonly IList<Address> _addresses;
         public Customer(Name name, Document document, Email email, string phone)
