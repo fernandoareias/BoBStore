@@ -2,11 +2,11 @@
 
 using System;
 using BoBStore.Domain.StoreContext.Enums;
-using Flunt.Notifications;
+using BoBStore.Shared.Entities;
 
 namespace BoBStore.Domain.StoreContext.Entities
 {
-    public class Delivery : Notifiable<Notification>
+    public class Delivery : Entity
     {
         public Delivery(DateTime estimatedDeliveryDate)
         {
