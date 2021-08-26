@@ -1,11 +1,12 @@
 
 
 using System;
+using BoBStore.Shared.Entities;
 using Flunt.Notifications;
 
 namespace BoBStore.Domain.StoreContext.Entities
 {
-    public class OrderItem : Notifiable<Notification>
+    public class OrderItem : Entity
     {
         public OrderItem(Product product, int quantity)
         {
