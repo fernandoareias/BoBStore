@@ -7,6 +7,7 @@ using BoBStore.Domain.StoreContext.Repositories;
 using BoBStore.Domain.StoreContext.Services;
 using BoBStore.Domain.StoreContext.ValueObjects;
 using BoBStore.Shared.Commands;
+using BoBStores.Domain.StoreContext.CustomerCommands.Inputs;
 using Flunt.Notifications;
 
 namespace BoBStore.Domain.StoreContext.Handlers
@@ -43,8 +44,7 @@ namespace BoBStore.Domain.StoreContext.Handlers
 
             // Validar entidades e VOs
             AddNotifications(name, document, email, customer);
-            if (!IsValid)
-                return null;
+
             // Persiste o cliente
             _repository.Save(customer);
 
@@ -52,7 +52,13 @@ namespace BoBStore.Domain.StoreContext.Handlers
             _emailService.Send(email.Address, "hello@bob.com", "Hello", "Welcome to BoB Store :)");
             // Retorna o resultado na tela
 
-            return new CreateCustomerCommandResult(customer.Id, name.ToString(), email.Address);
+            // Retornar o resultado para tela
+            return new CommandResult(true, "Welcome to BoB Store :)", new
+            {
+                Id = customer.Id,
+                Name = name.ToString(),
+                Email = email.Address
+            });
         }
 
         public ICommandResult Handler(AddAddressCommands Command)
