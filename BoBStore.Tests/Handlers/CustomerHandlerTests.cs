@@ -26,6 +26,12 @@ namespace BoBStore.Tests.ValueObjects
 
             // Testa sem depender de BDs
             var handler = new CustommerHandler(new FakeCustomerRepository(), new FakeEmailService());
+
+            var result = handler.Handler(command);
+
+            Assert.AreNotEqual(null, result);
+
+            //Assert.AreEqual(true, handler.IsValid);
         }
     }
 
