@@ -5,6 +5,7 @@ using Flunt.Validations;
 using BoBStore.Shared.Commands;
 namespace BoBStore.Domain.StoreContext.CustomerCommands.Inputs
 {
+    // Modelo para receber via API
     public class CreateCustomerCommand : Notifiable<Notification>, ICommands
     {
         public string FirstName { get; set; }
