@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BoBStore.Shared\BoBStore.Shared.csproj" />
+    <ProjectReference Include="..\BoBStore.Domain\BoBStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>
