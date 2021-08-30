@@ -24,8 +24,8 @@ namespace BoBStore.Api
             // Add MVC
             services.AddMvc();
 
-            // Injeção de Dependencias
-            services.AddTransient<BoBDataContext, BoBDataContext>();
+            // Injeção de Dependência
+            services.AddScoped<BoBDataContext, BoBDataContext>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IEmailService, EmailService>();
 
