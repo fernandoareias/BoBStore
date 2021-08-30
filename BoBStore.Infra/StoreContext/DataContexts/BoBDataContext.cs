@@ -5,6 +5,7 @@ using BoBStore.Shared;
 
 namespace BobStore.Infra.DataContexts
 {
+    // Classe responsável por abrir e fechar a conexão com o banco de dados
     public class BoBDataContext : IDisposable
     {
         public SqlConnection Connection { get; set; }
