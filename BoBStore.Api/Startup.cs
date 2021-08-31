@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BobStore.Infra.DataContexts;
 using BobStore.Infra.StoreContext.Repositories;
 using BobStore.Infra.StoreContext.Services;
+using BoBStore.Domain.StoreContext.Handlers;
 using BoBStore.Domain.StoreContext.Repositories;
 using BoBStore.Domain.StoreContext.Services;
 using Microsoft.AspNetCore.Builder;
@@ -24,10 +25,14 @@ namespace BoBStore.Api
             // Add MVC
             services.AddMvc();
 
+            // Comprime a API
+            services.AddResponseCompression();
+
             // Injeção de Dependência
             services.AddScoped<BoBDataContext, BoBDataContext>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<CustommerHandler, CustommerHandler>();
 
         }
 
@@ -36,6 +41,9 @@ namespace BoBStore.Api
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+            // Comprime a API
+            app.UseResponseCompression();
 
             // https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
             // Adiciona correspondência de rota ao pipeline de middleware.
