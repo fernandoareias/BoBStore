@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -7,6 +9,7 @@ using BoBStore.Domain.StoreContext.Queries;
 using BoBStore.Domain.StoreContext.Repositories;
 using Dapper;
 
+// Resopnsavel por realizar as querys no BDs
 namespace BobStore.Infra.StoreContext.Repositories
 {
     public class CustomerRepository : ICustomerRepository
@@ -43,6 +46,24 @@ namespace BobStore.Infra.StoreContext.Repositories
                 ).FirstOrDefault();
         }
 
+        public IEnumerable<ListCustomerQueryResult> Get()
+        {
+            return
+                _context
+                .Connection
+                .Query<ListCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer]", new { });
+        }
+
+        // Get By Id
+        public GetCustomerQueryResult GetById(Guid Id)
+        {
+            return
+               _context
+               .Connection
+               .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer] WHERE [Id]=@id", new { id = Id }).FirstOrDefault();
+
+        }
+
         // Lembrete: Criar a stored procedure no db
         public CustomerOrdersCountResult GetCustomerOrdersCount(string document)
         {
@@ -53,6 +74,16 @@ namespace BobStore.Infra.StoreContext.Repositories
                    new { Document = document },
                    commandType: CommandType.StoredProcedure)
                .FirstOrDefault();
+        }
+
+        public IEnumerable<ListCustomerOrderQueryResult> GetOrders(Guid id)
+        {
+            return
+                 _context
+                 .Connection
+                 .Query<ListCustomerOrderQueryResult>("", new { });
+
+
         }
 
         // Função responsavel por registrar o Customer no BD
