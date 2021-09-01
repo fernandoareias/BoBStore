@@ -16,6 +16,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Elmah.Io.AspNetCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using BoBStore.Shared;
 
 namespace BoBStore.Api
 {
@@ -23,8 +26,16 @@ namespace BoBStore.Api
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public static IConfiguration Configuration { get; set; }
         public void ConfigureServices(IServiceCollection services)
         {
+            // Config Settings
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
             // Add MVC
             services.AddMvc();
 
@@ -50,6 +61,8 @@ namespace BoBStore.Api
                 o.LogId = new Guid("f870932b-a55a-4932-96a2-893c1c8649ff");
             });
 
+            // Pega a connection string do appsettings.json
+            Settings.ConnectionString = $"{Configuration["connectionString"]}";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
