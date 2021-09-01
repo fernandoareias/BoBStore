@@ -16,5 +16,6 @@ namespace BoBStores.Domain.StoreContext.CustomerCommands.Inputs
         public bool Success { get; set; }
         public string Message { get; set; }
         public object Data { get; set; }
+        public bool Sucess { get; set; }
     }
 }
