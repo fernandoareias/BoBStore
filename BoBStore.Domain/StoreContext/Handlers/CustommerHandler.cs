@@ -45,6 +45,8 @@ namespace BoBStore.Domain.StoreContext.Handlers
             // Validar entidades e VOs
             AddNotifications(name, document, email, customer);
 
+            if (IsValid == false)
+                return new CommandResult(false, "Ops, ocorreu algum erro.", Notifications);
             // Persiste o cliente
             _repository.Save(customer);
 
