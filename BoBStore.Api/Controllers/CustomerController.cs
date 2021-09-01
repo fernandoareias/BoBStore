@@ -7,6 +7,7 @@ using BoBStore.Domain.StoreContext.Handlers;
 using BoBStore.Domain.StoreContext.Queries;
 using BoBStore.Domain.StoreContext.Repositories;
 using BoBStore.Domain.StoreContext.ValueObjects;
+using BoBStore.Shared.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoBStore.Api.Controllers
@@ -44,33 +45,18 @@ namespace BoBStore.Api.Controllers
 
         [HttpPost]
         [Route("v1/clientes")]
-        public object Post([FromBody] CreateCustomerCommand command)
+        public ICommandResult Post([FromBody] CreateCustomerCommand command)
         {
             // Raliza o parse para CreateCustomerCommandResult
             var result = (CreateCustomerCommandResult)_handler.Handler(command);
             if (_handler.IsValid == false)
-                return BadRequest(_handler.Notifications);
+                return result;
             return result;
 
         }
 
-        [HttpPut]
-        [Route("v1/clientes")]
-        public Customer Put([FromBody] CreateCustomerCommand command)
-        {
-            var name = new Name(command.FirstName, command.LastName);
-            var document = new Document(command.Document);
-            var email = new Email(command.Email);
-            var client = new Customer(name, document, email, command.Phone);
 
-            return client;
-        }
 
-        [HttpDelete]
-        [Route("clientes/{id}")]
-        public object Delete(Guid id)
-        {
-            return new { message = "Cliente removido com sucesso. " };
-        }
+
     }
 }
