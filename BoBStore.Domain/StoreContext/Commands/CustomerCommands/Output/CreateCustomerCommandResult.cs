@@ -9,20 +9,15 @@ namespace BoBStore.Domain.StoreContext.CustomerCommands.Inputs
 {
     public class CreateCustomerCommandResult : ICommandResult
     {
-        public CreateCustomerCommandResult() { }
-
-        public CreateCustomerCommandResult(Guid id, string name, string email)
+        public CreateCustomerCommandResult(bool sucess, string message, object data)
         {
-            Id = id;
-            Name = name;
-            Email = email;
+            Sucess = sucess;
+            Message = message;
+            Data = data;
         }
 
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-
-
-
+        public bool Sucess { get; set; }
+        public string Message { get; set; }
+        public object Data { get; set; }
     }
 }
