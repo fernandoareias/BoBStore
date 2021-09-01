@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Swagger;
+using Elmah.Io.AspNetCore;
 
 namespace BoBStore.Api
 {
@@ -34,6 +37,19 @@ namespace BoBStore.Api
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<CustommerHandler, CustommerHandler>();
 
+            // Documentação com Swagger
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "BoB Store", Version = "v1" });
+            });
+
+            // Configura os Logs
+            services.AddElmahIo(o =>
+            {
+                o.ApiKey = "93ffcd6f08de4de7bf3b6e998f11d3c9";
+                o.LogId = new Guid("f870932b-a55a-4932-96a2-893c1c8649ff");
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +68,14 @@ namespace BoBStore.Api
             // Adiciona a execução de ponto de extremidade ao pipeline de middleware
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
+            // Documenta a APIs
+            app.UseSwagger();
+
+            // Gera documentação em JSON
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BoB Store v1"));
+
+            // Gerar Logs
+            app.UseElmahIo();
         }
     }
 }
